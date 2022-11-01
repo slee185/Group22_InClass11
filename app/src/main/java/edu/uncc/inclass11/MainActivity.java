@@ -119,8 +119,11 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Log
     }
 
     @Override
-    public void goLogin() {
-        getSupportFragmentManager().popBackStack();
+    public void goAddCourse() {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.rootView, new AddCourseFragment())
+                .addToBackStack(null)
+                .commit();
     }
 
     @Override
@@ -132,10 +135,12 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Log
     }
 
     @Override
-    public void goAddCourse() {
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.rootView, new AddCourseFragment())
-                .addToBackStack(null)
-                .commit();
+    public void goGrades() {
+        getSupportFragmentManager().popBackStack();
+    }
+
+    @Override
+    public void goLogin() {
+        getSupportFragmentManager().popBackStack();
     }
 }
