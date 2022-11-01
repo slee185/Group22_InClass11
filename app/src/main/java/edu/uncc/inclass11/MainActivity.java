@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Log
 
             this.user = task.getResult().getUser();
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.rootView, new GradesFragment())
+                    .replace(R.id.rootView, GradesFragment.newInstance(this.user))
                     .commit();
         });
     }
@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Log
                 this.user = user;
 
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.rootView, new GradesFragment())
+                        .replace(R.id.rootView, GradesFragment.newInstance(this.user))
                         .commit();
             });
         });

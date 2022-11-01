@@ -10,21 +10,35 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.auth.FirebaseUser;
+
 import edu.uncc.inclass11.databinding.FragmentGradesBinding;
 
 public class GradesFragment extends Fragment {
-    public GradesFragment() {
-        // Required empty public constructor
+    FragmentGradesBinding binding;
+
+    private static final String ARG_USER = "user";
+
+    private FirebaseUser user;
+
+    public static GradesFragment newInstance(FirebaseUser user) {
+        GradesFragment fragment = new GradesFragment();
+        Bundle args = new Bundle();
+        args.putParcelable(ARG_USER, user);
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            user = getArguments().getParcelable(ARG_USER);
+        }
     }
 
-    FragmentGradesBinding binding;
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentGradesBinding.inflate(inflater, container, false);
         return binding.getRoot();
