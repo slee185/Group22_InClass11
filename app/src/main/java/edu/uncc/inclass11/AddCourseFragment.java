@@ -61,6 +61,7 @@ public class AddCourseFragment extends Fragment {
                     courseLetterGrade = "F";
                 }
 
+                mListener.createGrade(courseNumber, courseName, courseHours, courseLetterGrade);
             }
         });
     }
@@ -73,6 +74,7 @@ public class AddCourseFragment extends Fragment {
     }
 
     interface AddCourseListener {
+        void createGrade(String course_number, String course_name, Double course_hours, String course_grade);
         void goGrades();
     }
 }

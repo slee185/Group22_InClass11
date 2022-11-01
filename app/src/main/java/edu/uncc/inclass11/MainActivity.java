@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
@@ -92,8 +94,28 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Log
     }
 
     @Override
-    public void goGrades() {
-        getSupportFragmentManager().popBackStack();
+    public void createGrade(String course_number, String course_name, Double course_hours, String course_grade) {
+        Grade grade = new Grade(firebaseUser.getUid(), course_number, course_name, course_hours, course_grade);
+
+        firebaseFirestore
+                .collection("grades")
+                .document(grade.getGrade_id())
+                .set(grade)
+                .addOnCompleteListener(task -> {
+                    if (!task.isSuccessful()) {
+                        Exception exception = task.getException();
+                        assert exception != null;
+                        new AlertDialog.Builder(MainActivity.this)
+                                .setTitle("An Error Occurred")
+                                .setMessage(exception.getLocalizedMessage())
+                                .setPositiveButton("Ok", (dialog, which) -> dialog.dismiss())
+                                .show();
+
+                        return;
+                    }
+
+                    goGrades();
+                });
     }
 
     @Override
