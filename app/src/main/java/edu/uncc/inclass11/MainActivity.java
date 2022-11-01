@@ -15,7 +15,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class MainActivity extends AppCompatActivity implements LoginFragment.LoginListener, SignUpFragment.SignUpListener, GradesFragment.GradesListener, AddCourseFragment.AddCourseListener {
     final FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     final FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
-    FirebaseUser user;
+    FirebaseUser firebaseUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,9 +42,9 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Log
                 return;
             }
 
-            this.user = task.getResult().getUser();
+            this.firebaseUser = task.getResult().getUser();
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.rootView, GradesFragment.newInstance(this.user))
+                    .replace(R.id.rootView, GradesFragment.newInstance(this.firebaseUser))
                     .commit();
         });
     }
@@ -82,10 +82,10 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Log
                     return;
                 }
 
-                this.user = user;
+                this.firebaseUser = user;
 
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.rootView, GradesFragment.newInstance(this.user))
+                        .replace(R.id.rootView, GradesFragment.newInstance(this.firebaseUser))
                         .commit();
             });
         });
