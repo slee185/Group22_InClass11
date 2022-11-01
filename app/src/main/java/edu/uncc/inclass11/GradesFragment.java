@@ -1,5 +1,6 @@
 package edu.uncc.inclass11;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -68,5 +69,16 @@ public class GradesFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         requireActivity().setTitle(R.string.grades_label);
+    }
+    GradesListener mListener;
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        mListener = (GradesListener) context;
+    }
+
+    interface GradesListener {
+        void goAddCourse();
     }
 }

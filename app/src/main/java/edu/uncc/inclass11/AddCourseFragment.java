@@ -1,5 +1,6 @@
 package edu.uncc.inclass11;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -36,8 +37,11 @@ public class AddCourseFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.buttonSubmit.setOnClickListener(v -> {
+        binding.buttonCancel.setOnClickListener(v -> {
+            mListener.goGrades();
+        });
 
+        binding.buttonSubmit.setOnClickListener(v -> {
             String courseNumber = binding.editTextCourseNumber.getText().toString();
             String courseName = binding.editTextCourseName.getText().toString();
             double courseHours = Double.parseDouble(binding.editTextCourseHours.getText().toString());
@@ -63,6 +67,16 @@ public class AddCourseFragment extends Fragment {
 
             }
         });
+    }
+    AddCourseListener mListener;
 
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        mListener = (AddCourseListener) context;
+    }
+
+    interface AddCourseListener {
+        void goGrades();
     }
 }
