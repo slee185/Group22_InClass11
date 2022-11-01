@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Log
                 new AlertDialog.Builder(MainActivity.this)
                         .setTitle("An Error Occurred")
                         .setMessage(exception.getLocalizedMessage())
+                        .setPositiveButton("Ok", (dialog, which) -> dialog.dismiss())
                         .show();
 
                 return;
@@ -56,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Log
                 new AlertDialog.Builder(MainActivity.this)
                         .setTitle("An Error Occurred")
                         .setMessage(exception.getLocalizedMessage())
+                        .setPositiveButton("Ok", (dialog, which) -> dialog.dismiss())
                         .show();
 
                 return;
@@ -74,6 +77,7 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Log
                     new AlertDialog.Builder(MainActivity.this)
                             .setTitle("An Error Occurred")
                             .setMessage(exception.getLocalizedMessage())
+                            .setPositiveButton("Ok", (dialog, which) -> dialog.dismiss())
                             .show();
 
                     return;
