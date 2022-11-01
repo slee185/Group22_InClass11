@@ -36,28 +36,20 @@ public class SignUpFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        binding.buttonCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mListener.goLogin();
-            }
-        });
+        binding.buttonCancel.setOnClickListener(v -> mListener.goLogin());
 
-        binding.buttonSignup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String name = binding.editTextName.getText().toString();                String email = binding.editTextEmail.getText().toString();
-                String password = binding.editTextPassword.getText().toString();
+        binding.buttonSignup.setOnClickListener(v -> {
+            String name = binding.editTextName.getText().toString();                String email = binding.editTextEmail.getText().toString();
+            String password = binding.editTextPassword.getText().toString();
 
-                if(name.isEmpty()){
-                    Toast.makeText(requireActivity(), "Enter valid name!", Toast.LENGTH_SHORT).show();
-                } else if(email.isEmpty()){
-                    Toast.makeText(requireActivity(), "Enter valid email!", Toast.LENGTH_SHORT).show();
-                } else if (password.isEmpty()){
-                    Toast.makeText(requireActivity(), "Enter valid password!", Toast.LENGTH_SHORT).show();
-                } else {
-                    mListener.createAccount(name, email, password);
-                }
+            if(name.isEmpty()){
+                Toast.makeText(requireActivity(), "Enter valid name!", Toast.LENGTH_SHORT).show();
+            } else if(email.isEmpty()){
+                Toast.makeText(requireActivity(), "Enter valid email!", Toast.LENGTH_SHORT).show();
+            } else if (password.isEmpty()){
+                Toast.makeText(requireActivity(), "Enter valid password!", Toast.LENGTH_SHORT).show();
+            } else {
+                mListener.createAccount(name, email, password);
             }
         });
 

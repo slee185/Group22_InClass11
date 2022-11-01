@@ -36,34 +36,31 @@ public class AddCourseFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.buttonSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        binding.buttonSubmit.setOnClickListener(v -> {
 
-                String courseNumber = binding.editTextCourseNumber.getText().toString();
-                String courseName = binding.editTextCourseName.getText().toString();
-                double courseHours = Double.parseDouble(binding.editTextCourseHours.getText().toString());
-                int selectedId = binding.radioGroupGrades.getCheckedRadioButtonId();
+            String courseNumber = binding.editTextCourseNumber.getText().toString();
+            String courseName = binding.editTextCourseName.getText().toString();
+            double courseHours = Double.parseDouble(binding.editTextCourseHours.getText().toString());
+            int selectedId = binding.radioGroupGrades.getCheckedRadioButtonId();
 
-                if(courseName.isEmpty() || courseNumber.isEmpty() || binding.editTextCourseHours.getText().toString().isEmpty()) {
-                   Toast.makeText(getContext(), "Please enter all the fields", Toast.LENGTH_SHORT).show();
-                } else if(selectedId == -1){
-                    Toast.makeText(getContext(), "Please select a letter grade !!", Toast.LENGTH_SHORT).show();
+            if(courseName.isEmpty() || courseNumber.isEmpty() || binding.editTextCourseHours.getText().toString().isEmpty()) {
+               Toast.makeText(getContext(), "Please enter all the fields", Toast.LENGTH_SHORT).show();
+            } else if(selectedId == -1){
+                Toast.makeText(getContext(), "Please select a letter grade !!", Toast.LENGTH_SHORT).show();
+            } else {
+                String courseLetterGrade;
+                if(selectedId == R.id.radioButtonA) {
+                    courseLetterGrade = "A";
+                } else if(selectedId == R.id.radioButtonB) {
+                    courseLetterGrade = "B";
+                } else if(selectedId == R.id.radioButtonC) {
+                    courseLetterGrade = "C";
+                } else if(selectedId == R.id.radioButtonD) {
+                    courseLetterGrade = "D";
                 } else {
-                    String courseLetterGrade;
-                    if(selectedId == R.id.radioButtonA) {
-                        courseLetterGrade = "A";
-                    } else if(selectedId == R.id.radioButtonB) {
-                        courseLetterGrade = "B";
-                    } else if(selectedId == R.id.radioButtonC) {
-                        courseLetterGrade = "C";
-                    } else if(selectedId == R.id.radioButtonD) {
-                        courseLetterGrade = "D";
-                    } else {
-                        courseLetterGrade = "F";
-                    }
-
+                    courseLetterGrade = "F";
                 }
+
             }
         });
 

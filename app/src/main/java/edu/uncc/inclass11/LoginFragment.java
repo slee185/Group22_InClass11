@@ -38,29 +38,21 @@ public class LoginFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         binding.buttonLogin.setEnabled(true);
-        binding.buttonLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String email = binding.editTextEmail.getText().toString();
-                String password = binding.editTextPassword.getText().toString();
+        binding.buttonLogin.setOnClickListener(v -> {
+            String email = binding.editTextEmail.getText().toString();
+            String password = binding.editTextPassword.getText().toString();
 
-                if(email.isEmpty()){
-                    Toast.makeText(requireActivity(), "Enter valid email!", Toast.LENGTH_SHORT).show();
-                } else if (password.isEmpty()){
-                    Toast.makeText(requireActivity(), "Enter valid password!", Toast.LENGTH_SHORT).show();
-                } else {
-                    binding.buttonLogin.setEnabled(false);
-                    mListener.authenticate(email, password);
-                }
+            if(email.isEmpty()){
+                Toast.makeText(requireActivity(), "Enter valid email!", Toast.LENGTH_SHORT).show();
+            } else if (password.isEmpty()){
+                Toast.makeText(requireActivity(), "Enter valid password!", Toast.LENGTH_SHORT).show();
+            } else {
+                binding.buttonLogin.setEnabled(false);
+                mListener.authenticate(email, password);
             }
         });
 
-        binding.buttonCreateNewAccount.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mListener.goCreateNewAccount();
-            }
-        });
+        binding.buttonCreateNewAccount.setOnClickListener(v -> mListener.goCreateNewAccount());
 
         requireActivity().setTitle(R.string.login_label);
     }
