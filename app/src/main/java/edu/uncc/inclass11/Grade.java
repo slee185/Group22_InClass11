@@ -14,6 +14,8 @@ public class Grade implements Serializable {
     private String course_grade;
     private Timestamp created_at;
 
+    public Grade() {}
+
     public Grade(String user_id, String course_number, String course_name, Double course_hours, String course_grade) {
         this.user_id = user_id;
         this.course_number = course_number;
