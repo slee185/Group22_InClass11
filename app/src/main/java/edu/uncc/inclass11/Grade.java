@@ -85,4 +85,17 @@ public class Grade implements Serializable {
         this.created_at = created_at;
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "Grade{" +
+                "grade_id='" + grade_id + '\'' +
+                ", user_id='" + user_id + '\'' +
+                ", course_number='" + course_number + '\'' +
+                ", course_name='" + course_name + '\'' +
+                ", course_hours=" + course_hours +
+                ", course_grade='" + course_grade + '\'' +
+                ", created_at=" + created_at +
+                '}';
+    }
 }
