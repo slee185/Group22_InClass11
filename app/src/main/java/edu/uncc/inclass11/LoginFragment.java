@@ -43,14 +43,12 @@ public class LoginFragment extends Fragment {
             public void onClick(View v) {
                 String email = binding.editTextEmail.getText().toString();
                 String password = binding.editTextPassword.getText().toString();
+
                 if(email.isEmpty()){
                     Toast.makeText(requireActivity(), "Enter valid email!", Toast.LENGTH_SHORT).show();
                 } else if (password.isEmpty()){
                     Toast.makeText(requireActivity(), "Enter valid password!", Toast.LENGTH_SHORT).show();
                 } else {
-
-
-
                 }
             }
         });
@@ -66,6 +64,7 @@ public class LoginFragment extends Fragment {
     }
 
     LoginListener mListener;
+
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
