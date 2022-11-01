@@ -56,7 +56,7 @@ public class LoginFragment extends Fragment {
         binding.buttonCreateNewAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mListener.createNewAccount();
+                mListener.goCreateNewAccount();
             }
         });
 
@@ -64,7 +64,6 @@ public class LoginFragment extends Fragment {
     }
 
     LoginListener mListener;
-
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -72,6 +71,6 @@ public class LoginFragment extends Fragment {
     }
 
     interface LoginListener {
-        void createNewAccount();
+        void goCreateNewAccount();
     }
 }

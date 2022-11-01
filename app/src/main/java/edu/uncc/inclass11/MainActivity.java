@@ -23,4 +23,12 @@ public class MainActivity extends AppCompatActivity {
     public void goLogin() {
         getSupportFragmentManager().popBackStack();
     }
+
+    @Override
+    public void goCreateNewAccount() {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.rootView, new SignUpFragment())
+                .addToBackStack(null)
+                .commit();
+    }
 }
