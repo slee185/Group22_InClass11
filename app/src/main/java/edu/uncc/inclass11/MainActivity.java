@@ -18,4 +18,9 @@ public class MainActivity extends AppCompatActivity {
                 .add(R.id.rootView, new LoginFragment())
                 .commit();
     }
+
+    @Override
+    public void goLogin() {
+        getSupportFragmentManager().popBackStack();
+    }
 }

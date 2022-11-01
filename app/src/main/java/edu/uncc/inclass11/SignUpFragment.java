@@ -39,15 +39,14 @@ public class SignUpFragment extends Fragment {
         binding.buttonCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mListener.login();
+                mListener.goLogin();
             }
         });
 
         binding.buttonSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String name = binding.editTextName.getText().toString();
-                String email = binding.editTextEmail.getText().toString();
+                String name = binding.editTextName.getText().toString();                String email = binding.editTextEmail.getText().toString();
                 String password = binding.editTextPassword.getText().toString();
 
                 if(name.isEmpty()){
@@ -74,6 +73,6 @@ public class SignUpFragment extends Fragment {
     }
 
     interface SignUpListener {
-        void login();
+        void goLogin();
     }
 }
