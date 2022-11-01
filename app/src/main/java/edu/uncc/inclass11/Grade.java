@@ -1,5 +1,7 @@
 package edu.uncc.inclass11;
 
+import com.google.firebase.Timestamp;
+
 import java.io.Serializable;
 import java.util.UUID;
 
@@ -10,6 +12,7 @@ public class Grade implements Serializable {
     private String course_name;
     private Double course_hours;
     private String course_grade;
+    private Timestamp created_at;
 
     public Grade(String user_id, String course_number, String course_name, Double course_hours, String course_grade) {
         this.user_id = user_id;
@@ -17,6 +20,7 @@ public class Grade implements Serializable {
         this.course_name = course_name;
         this.course_hours = course_hours;
         this.course_grade = course_grade;
+        this.created_at = Timestamp.now();
     }
 
     public String getGrade_id() {
@@ -41,6 +45,10 @@ public class Grade implements Serializable {
 
     public String getCourse_grade() {
         return course_grade;
+    }
+
+    public Timestamp getCreated_at() {
+        return created_at;
     }
 
     public Grade setGrade_id(String grade_id) {
@@ -70,6 +78,11 @@ public class Grade implements Serializable {
 
     public Grade setCourse_grade(String course_grade) {
         this.course_grade = course_grade;
+        return this;
+    }
+
+    public Grade setCreated_at(Timestamp created_at) {
+        this.created_at = created_at;
         return this;
     }
 }
