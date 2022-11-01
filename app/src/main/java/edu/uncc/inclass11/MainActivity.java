@@ -27,6 +27,27 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Log
     }
 
     @Override
+    public void authenticate(@NonNull String username, @NonNull String password) {
+        firebaseAuth.signInWithEmailAndPassword(username, password).addOnCompleteListener(task -> {
+            if (!task.isSuccessful()) {
+                Exception exception = task.getException();
+                assert exception != null;
+                new AlertDialog.Builder(MainActivity.this)
+                        .setTitle("An Error Occurred")
+                        .setMessage(exception.getLocalizedMessage())
+                        .show();
+
+                return;
+            }
+
+            this.user = task.getResult().getUser();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.rootView, new GradesFragment())
+                    .commit();
+        });
+    }
+
+    @Override
     public void createAccount(@NonNull String name, @NonNull String email, @NonNull String password) {
         firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(createTask -> {
             if (!createTask.isSuccessful()) {

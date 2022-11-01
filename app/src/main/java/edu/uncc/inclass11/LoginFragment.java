@@ -49,6 +49,8 @@ public class LoginFragment extends Fragment {
                 } else if (password.isEmpty()){
                     Toast.makeText(requireActivity(), "Enter valid password!", Toast.LENGTH_SHORT).show();
                 } else {
+                    binding.buttonLogin.setEnabled(false);
+                    mListener.authenticate(email, password);
                 }
             }
         });
@@ -71,6 +73,7 @@ public class LoginFragment extends Fragment {
     }
 
     interface LoginListener {
+        void authenticate(String username, String password);
         void goCreateNewAccount();
     }
 }
