@@ -6,8 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
@@ -44,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Log
             }
 
             this.firebaseUser = task.getResult().getUser();
+
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.rootView, GradesFragment.newInstance(this.firebaseUser))
                     .commit();
