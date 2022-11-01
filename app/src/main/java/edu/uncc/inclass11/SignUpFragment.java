@@ -56,6 +56,7 @@ public class SignUpFragment extends Fragment {
                 } else if (password.isEmpty()){
                     Toast.makeText(requireActivity(), "Enter valid password!", Toast.LENGTH_SHORT).show();
                 } else {
+                    mListener.createAccount(name, email, password);
                 }
             }
         });
@@ -63,7 +64,6 @@ public class SignUpFragment extends Fragment {
         requireActivity().setTitle(R.string.create_account_label);
 
     }
-
     SignUpListener mListener;
 
     @Override
@@ -73,6 +73,7 @@ public class SignUpFragment extends Fragment {
     }
 
     interface SignUpListener {
+        void createAccount(String name, String email, String password);
         void goLogin();
     }
 }
