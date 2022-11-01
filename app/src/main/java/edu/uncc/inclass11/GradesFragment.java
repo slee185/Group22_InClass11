@@ -47,6 +47,6 @@ public class GradesFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        requireActivity().setTitle(R.string.grades_label);
     }
 }
