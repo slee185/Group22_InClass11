@@ -10,16 +10,11 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RadioButton;
 import android.widget.Toast;
 
 import edu.uncc.inclass11.databinding.FragmentAddCourseBinding;
 
 public class AddCourseFragment extends Fragment {
-    public AddCourseFragment() {
-        // Required empty public constructor
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
