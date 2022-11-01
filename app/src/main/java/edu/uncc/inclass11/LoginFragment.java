@@ -37,6 +37,7 @@ public class LoginFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        binding.buttonLogin.setEnabled(true);
         binding.buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,7 +66,6 @@ public class LoginFragment extends Fragment {
     }
 
     LoginListener mListener;
-
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
