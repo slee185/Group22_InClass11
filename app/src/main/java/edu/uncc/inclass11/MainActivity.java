@@ -98,6 +98,8 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Log
         Grade grade = new Grade(firebaseUser.getUid(), course_number, course_name, course_hours, course_grade);
 
         firebaseFirestore
+                .collection("students")
+                .document(grade.getUser_id())
                 .collection("grades")
                 .document(grade.getGrade_id())
                 .set(grade)
