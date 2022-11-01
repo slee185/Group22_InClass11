@@ -43,9 +43,9 @@ public class LoginFragment extends Fragment {
                 String email = binding.editTextEmail.getText().toString();
                 String password = binding.editTextPassword.getText().toString();
                 if(email.isEmpty()){
-                    Toast.makeText(getActivity(), "Enter valid email!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireActivity(), "Enter valid email!", Toast.LENGTH_SHORT).show();
                 } else if (password.isEmpty()){
-                    Toast.makeText(getActivity(), "Enter valid password!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireActivity(), "Enter valid password!", Toast.LENGTH_SHORT).show();
                 } else {
 
 
@@ -61,7 +61,7 @@ public class LoginFragment extends Fragment {
             }
         });
 
-        getActivity().setTitle(R.string.login_label);
+        requireActivity().setTitle(R.string.login_label);
     }
 
     LoginListener mListener;

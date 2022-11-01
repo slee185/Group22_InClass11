@@ -51,18 +51,18 @@ public class SignUpFragment extends Fragment {
                 String password = binding.editTextPassword.getText().toString();
 
                 if(name.isEmpty()){
-                    Toast.makeText(getActivity(), "Enter valid name!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireActivity(), "Enter valid name!", Toast.LENGTH_SHORT).show();
                 } else if(email.isEmpty()){
-                    Toast.makeText(getActivity(), "Enter valid email!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireActivity(), "Enter valid email!", Toast.LENGTH_SHORT).show();
                 } else if (password.isEmpty()){
-                    Toast.makeText(getActivity(), "Enter valid password!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireActivity(), "Enter valid password!", Toast.LENGTH_SHORT).show();
                 } else {
 
                 }
             }
         });
 
-        getActivity().setTitle(R.string.create_account_label);
+        requireActivity().setTitle(R.string.create_account_label);
 
     }
 
