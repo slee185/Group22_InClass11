@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -51,7 +50,8 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Log
 
     @Override
     public void createAccount(@NonNull String name, @NonNull String email, @NonNull String password) {
-        firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(createTask -> {            if (!createTask.isSuccessful()) {
+        firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(createTask -> {
+            if (!createTask.isSuccessful()) {
                 Exception exception = createTask.getException();
                 assert exception != null;
                 new AlertDialog.Builder(MainActivity.this)
