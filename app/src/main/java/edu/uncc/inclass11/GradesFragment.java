@@ -9,12 +9,14 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.firebase.ui.common.ChangeEventType;
@@ -189,6 +191,14 @@ public class GradesFragment extends Fragment {
         void setCourse_name(String course_name) {
             TextView textView = view.findViewById(R.id.textViewCourseName);
             textView.setText(course_name);
+
+            ImageView imageViewDelete = view.findViewById(R.id.imageViewDelete);
+            imageViewDelete.setOnClickListener(view -> firebaseFirestore.collection("grades").document(course_name)
+                    .delete()
+                    .addOnSuccessListener(unused -> Log.d("demo", "Grade successfully deleted"))
+                    .addOnFailureListener(e -> Log.w("demo", "Error deleting grade", e)));
+
+            mListener.goGrades();
         }
 
         void setCourse_hours(Double course_hours) {
@@ -204,5 +214,7 @@ public class GradesFragment extends Fragment {
 
     interface GradesListener {
         void goAddCourse();
+
+        void goGrades();
     }
 }
