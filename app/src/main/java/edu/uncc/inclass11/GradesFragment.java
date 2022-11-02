@@ -33,8 +33,8 @@ public class GradesFragment extends Fragment {
 
     private static final String ARG_USER = "user";
 
-    private FirebaseUser user;
     private FirebaseFirestore mStore = FirebaseFirestore.getInstance();
+    private FirebaseUser firebaseUser;
 
 
     public static GradesFragment newInstance(FirebaseUser user) {
@@ -64,7 +64,7 @@ public class GradesFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            user = getArguments().getParcelable(ARG_USER);
+            firebaseUser = getArguments().getParcelable(ARG_USER);
         }
 
         setHasOptionsMenu(true);
