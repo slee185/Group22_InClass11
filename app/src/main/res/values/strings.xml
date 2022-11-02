@@ -13,7 +13,7 @@
     <string name="posts_label">Posts</string>
     <string name="create_account_label">Create New Account</string>
     <string name="grades_label">Grades</string>
-    <string name="grades_gpa_label">GPA: </string>
-    <string name="grades_hours_label">Hours: </string>
+    <string name="grades_gpa_label">GPA: %.1f</string>
+    <string name="grades_hours_label">Hours: %.1f</string>
     <string name="grades_courses_label">Courses</string>
 </resources>
