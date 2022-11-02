@@ -26,6 +26,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import com.google.firebase.firestore.Query;
 
+import java.util.Locale;
+
 import edu.uncc.inclass11.databinding.FragmentGradesBinding;
 
 public class GradesFragment extends Fragment {
@@ -111,9 +113,9 @@ public class GradesFragment extends Fragment {
             textView.setText(course_name);
         }
 
-        void setCourse_hours(String course_hours) {
+        void setCourse_hours(Double course_hours) {
             TextView textView = view.findViewById(R.id.textViewCourseHours);
-            textView.setText(course_hours);
+            textView.setText(String.format(Locale.US, "%f", course_hours));
         }
 
         void setCourse_letter_grade(String course_letter_grade) {
