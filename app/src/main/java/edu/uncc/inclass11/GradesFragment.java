@@ -105,13 +105,9 @@ public class GradesFragment extends Fragment {
     private static class GradeHolder extends RecyclerView.ViewHolder {
         private final View view;
 
-        public GradeHolder(@NonNull View itemView, View view) {
+        public GradeHolder(@NonNull View itemView) {
             super(itemView);
-            this.view = view;
-        }
-
-        public View getView() {
-            return view;
+            this.view = itemView;
         }
 
         void setCourse_number(String course_number) {
