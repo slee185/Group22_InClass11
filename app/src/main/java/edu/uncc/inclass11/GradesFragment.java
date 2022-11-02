@@ -33,8 +33,8 @@ public class GradesFragment extends Fragment {
 
     private static final String ARG_USER = "user";
 
-    private FirebaseFirestore mStore = FirebaseFirestore.getInstance();
     private FirebaseUser firebaseUser;
+    private final FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
 
 
     public static GradesFragment newInstance(FirebaseUser user) {
