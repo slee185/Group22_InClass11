@@ -53,6 +53,32 @@ public class Grade implements Serializable {
         return created_at;
     }
 
+    /**
+     * @return Double
+     */
+    public Double calcCourse_points() {
+        double points = 0.0;
+
+        switch (getCourse_grade()) {
+            case "A":
+                points += 4 * getCourse_hours();
+                break;
+            case "B":
+                points += 3 * getCourse_hours();
+                break;
+            case "C":
+                points += 2 * getCourse_hours();
+                break;
+            case "D":
+                points += 1 * getCourse_hours();
+                break;
+            default:
+                points += 0 * getCourse_hours();
+        }
+
+        return points;
+    }
+
     public Grade setGrade_id(String grade_id) {
         this.grade_id = grade_id;
         return this;
