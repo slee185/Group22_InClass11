@@ -81,16 +81,7 @@ public class GradesFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         requireActivity().setTitle(R.string.grades_label);
 
-       // binding.textViewGPA.setText(getString(R.string.grades_gpa_label, gpa));
-
-       // binding.textView2.setText(getString(R.string.grades_hours_label, totalHours));
-
         binding.gradesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-      //  FirestoreRecyclerAdapter adapter = mListener.createRecyclerAdapter();
-       // binding.gradesRecyclerView.setAdapter(adapter);
-
-
 
     }
 
