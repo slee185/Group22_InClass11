@@ -17,8 +17,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.firebase.ui.common.ChangeEventType;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
@@ -33,7 +36,7 @@ public class GradesFragment extends Fragment {
 
     private FirebaseUser firebaseUser;
     private final FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
-
+    private FirestoreRecyclerAdapter<Grade, GradeHolder> adapter;
 
     public static GradesFragment newInstance(FirebaseUser user) {
         GradesFragment fragment = new GradesFragment();
@@ -59,6 +62,18 @@ public class GradesFragment extends Fragment {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        adapter.startListening();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        adapter.stopListening();
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
@@ -77,10 +92,67 @@ public class GradesFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        requireActivity().setTitle(R.string.grades_label);
 
         binding.gradesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        Query query = firebaseFirestore
+                .collection("students")
+                .document(firebaseUser.getUid())
+                .collection("grades")
+                .orderBy("created_at", Query.Direction.DESCENDING);
+
+        FirestoreRecyclerOptions<Grade> options = new FirestoreRecyclerOptions.Builder<Grade>()
+                .setQuery(query, Grade.class)
+                .build();
+
+        adapter = new FirestoreRecyclerAdapter<Grade, GradeHolder>(options) {
+            private Double hours = 0.0;
+            private Double points = 0.0;
+
+            @Override
+            public void onBindViewHolder(@NonNull GradeHolder holder, int position, @NonNull Grade model) {
+                holder.setCourse_hours(model.getCourse_hours());
+                holder.setCourse_letter_grade(model.getCourse_grade());
+                holder.setCourse_name(model.getCourse_name());
+                holder.setCourse_number(model.getCourse_number());
+            }
+
+            @Override
+            public void onChildChanged(@NonNull ChangeEventType type, @NonNull DocumentSnapshot snapshot, int newIndex, int oldIndex) {
+                super.onChildChanged(type, snapshot, newIndex, oldIndex);
+
+                Grade model = snapshot.toObject(Grade.class);
+
+                assert model != null;
+                switch (type) {
+                    case ADDED:
+                        points += model.calcCourse_points();
+                        hours += model.getCourse_hours();
+                        break;
+                    case CHANGED:
+                        hours = 0.0;
+                        points = 0.0;
+                        break;
+                    case REMOVED:
+                        points -= model.calcCourse_points();
+                        hours -= model.getCourse_hours();
+                        break;
+                }
+
+                setGpa(hours > 0 ? points / hours : 0);
+                setHours(hours);
+            }
+
+            @NonNull
+            @Override
+            public GradeHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.grade_row_item, parent, false);
+                return new GradeHolder(view);
+            }
+        };
+        binding.gradesRecyclerView.setAdapter(adapter);
+
+        requireActivity().setTitle(R.string.grades_label);
     }
 
     GradesListener mListener;
@@ -91,7 +163,17 @@ public class GradesFragment extends Fragment {
         mListener = (GradesListener) context;
     }
 
-    private static class GradeHolder extends RecyclerView.ViewHolder {
+    private void setGpa(Double gpa) {
+        TextView textView = binding.textViewGPA;
+        textView.setText(getString(R.string.grades_gpa_label, gpa));
+    }
+
+    private void setHours(Double hours) {
+        TextView textView = binding.textViewHours;
+        textView.setText(getString(R.string.grades_hours_label, hours));
+    }
+
+    private class GradeHolder extends RecyclerView.ViewHolder {
         private final View view;
 
         public GradeHolder(@NonNull View itemView) {
@@ -111,7 +193,7 @@ public class GradesFragment extends Fragment {
 
         void setCourse_hours(Double course_hours) {
             TextView textView = view.findViewById(R.id.textViewCourseHours);
-            textView.setText(String.format(Locale.US, "%f", course_hours));
+            textView.setText(String.format(Locale.US, "%.1f", course_hours));
         }
 
         void setCourse_letter_grade(String course_letter_grade) {
