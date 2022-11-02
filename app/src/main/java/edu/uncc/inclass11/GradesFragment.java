@@ -137,7 +137,5 @@ public class GradesFragment extends Fragment {
 
     interface GradesListener {
         void goAddCourse();
-
-        void createRecyclerAdapter();
     }
 }
