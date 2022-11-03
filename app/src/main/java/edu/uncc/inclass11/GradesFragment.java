@@ -117,6 +117,7 @@ public class GradesFragment extends Fragment {
                 holder.setCourse_letter_grade(model.getCourse_grade());
                 holder.setCourse_name(model.getCourse_name());
                 holder.setCourse_number(model.getCourse_number());
+                holder.setCourse_id(model.getGrade_id());
             }
 
             @Override
@@ -191,19 +192,6 @@ public class GradesFragment extends Fragment {
         void setCourse_name(String course_name) {
             TextView textView = view.findViewById(R.id.textViewCourseName);
             textView.setText(course_name);
-
-            ImageView imageViewDelete = view.findViewById(R.id.imageViewDelete);
-            imageViewDelete.setOnClickListener(view -> firebaseFirestore
-                    .collection("students")
-                    .document(firebaseUser.getUid())
-                    .collection("grades")
-                    .document(course_name)
-                    .delete()
-                    .addOnSuccessListener(unused ->  {
-                        Log.d("demo", "Grade successfully deleted");
-                        mListener.refreshGrades();
-                    })
-                    .addOnFailureListener(e -> Log.w("demo", "Error deleting grade", e)));
         }
 
         void setCourse_hours(Double course_hours) {
@@ -214,6 +202,18 @@ public class GradesFragment extends Fragment {
         void setCourse_letter_grade(String course_letter_grade) {
             TextView textView = view.findViewById(R.id.textViewCourseLetterGrade);
             textView.setText(course_letter_grade);
+        }
+
+        public void setCourse_id(String grade_id) {
+            ImageView imageViewDelete = view.findViewById(R.id.imageViewDelete);
+            imageViewDelete.setOnClickListener(view -> firebaseFirestore
+                    .collection("students")
+                    .document(firebaseUser.getUid())
+                    .collection("grades")
+                    .document(grade_id)
+                    .delete()
+                    .addOnSuccessListener(unused -> Log.d("demo", "Grade successfully deleted"))
+                    .addOnFailureListener(e -> Log.w("demo", "Error deleting grade", e)));
         }
     }
 
