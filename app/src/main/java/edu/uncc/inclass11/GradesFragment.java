@@ -193,12 +193,17 @@ public class GradesFragment extends Fragment {
             textView.setText(course_name);
 
             ImageView imageViewDelete = view.findViewById(R.id.imageViewDelete);
-            imageViewDelete.setOnClickListener(view -> firebaseFirestore.collection("grades").document(course_name)
+            imageViewDelete.setOnClickListener(view -> firebaseFirestore
+                    .collection("students")
+                    .document(firebaseUser.getUid())
+                    .collection("grades")
+                    .document(course_name)
                     .delete()
-                    .addOnSuccessListener(unused -> Log.d("demo", "Grade successfully deleted"))
+                    .addOnSuccessListener(unused ->  {
+                        Log.d("demo", "Grade successfully deleted");
+                        mListener.refreshGrades();
+                    })
                     .addOnFailureListener(e -> Log.w("demo", "Error deleting grade", e)));
-
-            mListener.goGrades();
         }
 
         void setCourse_hours(Double course_hours) {
@@ -215,6 +220,6 @@ public class GradesFragment extends Fragment {
     interface GradesListener {
         void goAddCourse();
 
-        void goGrades();
+        void refreshGrades();
     }
 }

@@ -5,8 +5,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.ImageView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -126,6 +124,13 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Log
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.rootView, new AddCourseFragment())
                 .addToBackStack(null)
+                .commit();
+    }
+
+    @Override
+    public void refreshGrades() {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.rootView, GradesFragment.newInstance(this.firebaseUser))
                 .commit();
     }
 
