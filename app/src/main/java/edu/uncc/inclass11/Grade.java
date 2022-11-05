@@ -1,7 +1,10 @@
+// In Class Assignment 11
+// Group22_InClass11
+// Stephanie Lee Karp & Ken Stanley
+
 package edu.uncc.inclass11;
 
 import com.google.firebase.Timestamp;
-
 import java.io.Serializable;
 import java.util.UUID;
 

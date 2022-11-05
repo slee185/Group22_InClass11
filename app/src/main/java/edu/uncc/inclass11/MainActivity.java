@@ -1,3 +1,7 @@
+// In Class Assignment 11
+// Group22_InClass11
+// Stephanie Lee Karp & Ken Stanley
+
 package edu.uncc.inclass11;
 
 import androidx.annotation.NonNull;
@@ -124,13 +128,6 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Log
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.rootView, new AddCourseFragment())
                 .addToBackStack(null)
-                .commit();
-    }
-
-    @Override
-    public void refreshGrades() {
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.rootView, GradesFragment.newInstance(this.firebaseUser))
                 .commit();
     }
 

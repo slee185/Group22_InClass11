@@ -1,3 +1,7 @@
+// In Class Assignment 11
+// Group22_InClass11
+// Stephanie Lee Karp & Ken Stanley
+
 package edu.uncc.inclass11;
 
 import android.content.Context;
@@ -27,8 +31,7 @@ public class LoginFragment extends Fragment {
     FragmentLoginBinding binding;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentLoginBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
@@ -56,6 +59,7 @@ public class LoginFragment extends Fragment {
     }
 
     LoginListener mListener;
+
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);

@@ -1,3 +1,7 @@
+// In Class Assignment 11
+// Group22_InClass11
+// Stephanie Lee Karp & Ken Stanley
+
 package edu.uncc.inclass11;
 
 import android.content.Context;
@@ -219,7 +223,5 @@ public class GradesFragment extends Fragment {
 
     interface GradesListener {
         void goAddCourse();
-
-        void refreshGrades();
     }
 }
